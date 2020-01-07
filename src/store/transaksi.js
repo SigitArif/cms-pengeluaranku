@@ -1,0 +1,21 @@
+import {appConfig} from '../config/app';
+import axios from 'axios';
+const baseUrl = appConfig.apiUrl + '/pengeluaranku-service/api/v1/transaksi';
+
+export function postData(data){
+    return axios.post(baseUrl+'/add-transaksi', data).then(res=>{
+        return res;
+    }).catch(err=>{
+        throw err;
+    })
+}
+
+export function getData(){
+    return axios.get(baseUrl+'/list').then(res=>{
+        return res;
+    }).catch(err=>{
+        throw err;
+    })
+}
+
+
