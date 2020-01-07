@@ -100,7 +100,7 @@ export default class TransaksiList extends React.Component {
         return (
             <div>
                 <TableComponent
-                    title={"Daftar Pengeluaran"}
+                    title={"Daftar Transaksi"}
                     dataSource={this.state.data}
                     columns={columns}
                     onClickAdd={this.moveToAddForm}
