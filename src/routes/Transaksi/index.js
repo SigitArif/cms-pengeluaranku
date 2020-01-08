@@ -31,7 +31,7 @@ class Transaksi extends React.Component{
         return postData(data).then(res=>{
             swal('Berhasil', 'Data berhasil ditambahkan', 'success');
             this.setState({
-                name : 'debit',
+                name : '',
                 amount : '',
                 detail_transaksi : ''
             })
