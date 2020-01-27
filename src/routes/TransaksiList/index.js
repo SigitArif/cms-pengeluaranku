@@ -1,6 +1,6 @@
 import React from 'react';
 import TableComponent from '../../Component/Table';
-import { getData, postData as editDataStore } from '../../store/transaksi';
+import { getData, deleteData } from '../../store/transaksi';
 import { Button, Modal, Input, Radio } from 'antd';
 import swal from 'sweetalert';
 
@@ -16,6 +16,29 @@ export default class TransaksiList extends React.Component {
             })
         });
     }
+    deleteData = (row) => {
+        swal({
+            title: "Are you sure?",
+            text: "Apakah kamu yakin untuk menghapus data",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then(async (willDelete) => {
+                if (willDelete) {
+                    try {
+                        await deleteData(row.uuid).catch(err => {
+                            throw err;
+                        })
+                        await this.getTransaksiData();
+                        swal('Berhasil', 'Data berhasil dihapus', 'success');
+                    } catch (err) {
+                        swal('Error', 'data gagal dihapus', 'error');
+                    }
+                }
+            });
+    }
+
 
     state = {
         data: [],
@@ -80,23 +103,6 @@ export default class TransaksiList extends React.Component {
             }
         ];
 
-        const contohData = [
-            {
-                name: 'Beli baju',
-                code: 'B0001',
-                type: 'debit'
-            },
-            {
-                name: 'Jual Batu Bara',
-                code: 'J0002',
-                type: 'kredit'
-            },
-            {
-                name: 'Tukar emas',
-                code: 'T0001',
-                type: 'debit'
-            }
-        ]
         return (
             <div>
                 <TableComponent

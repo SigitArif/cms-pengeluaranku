@@ -19,3 +19,12 @@ export function getData(){
 }
 
 
+export async function deleteData(id){
+    return axios.delete(baseUrl+'/delete?uuid='+id).then(res=>{
+        return res;
+    }).catch(err=>{
+        throw err;
+    })
+}
+
+
