@@ -2,13 +2,15 @@ import React from 'react';
 import {postData} from '../../store/transaksi';
 import {getData} from '../../store/pengeluaran';
 import swal from 'sweetalert';
-import { Menu, Dropdown, Button, Icon, message, Input } from 'antd';
+import { Menu, DatePicker, Dropdown, Button, Icon, message, Input } from 'antd';
 
 class Transaksi extends React.Component{
     state = {
         name : 'Nama Pengeluaran',
         amount : '',
         detail_transaksi : '',
+        tanggal_transaksi: '',
+        dateString:'',
         pengeluaran: []
     };
 
@@ -53,7 +55,9 @@ class Transaksi extends React.Component{
             this.setState({
                 name : 'Nama Pengeluaran',
                 amount : '',
-                detail_transaksi : ''
+                detail_transaksi : '',
+                tanggal_transaksi: '',
+                dateString: ''
             })
         }).catch(err=>{
             swal('Error', 'gagal menyimpan data', 'error');
@@ -63,6 +67,15 @@ class Transaksi extends React.Component{
     handleButtonClick = (e)=>{
         message.info('Click on left button.');
         console.log('click left button', e);
+    }
+
+    handleDateClick = (date, dateString)=>{
+        console.log(date, dateString);
+        var someDate = new Date(dateString);
+
+            this.onChangeText('tanggal_transaksi', someDate.getTime());
+            
+            
     }
 
 
@@ -76,7 +89,6 @@ class Transaksi extends React.Component{
             message.info('Click on left button.');
             console.log('click left button', e);
           }
-          
 
         const onClick = ({ key }) => {
             this.setState({
@@ -112,6 +124,13 @@ class Transaksi extends React.Component{
                         value={this.state.detail_transaksi} 
                         onChange={(event)=>this.onChangeText('detail_transaksi', event.target.value)}
                         placeholder={"Keterangan"}/>
+                </div>
+
+                <div className="form-controller">
+                <DatePicker
+                      placeholder={"Pilih Tanggal"}
+                      showTime={true}
+                      onChange={this.handleDateClick} />
                 </div>
                 
                 <div className="form-controller">
