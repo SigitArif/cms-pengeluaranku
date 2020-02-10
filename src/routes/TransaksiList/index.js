@@ -48,6 +48,7 @@ export default class TransaksiList extends React.Component {
             name: '',
             amount: '',
             detail_transaksi: '',
+            tanggal_transaksi:''
         }
     }
 
@@ -73,9 +74,14 @@ export default class TransaksiList extends React.Component {
                 key: 'name'
             },
             {
-                title: 'Besaran Pengeluaran',
+                title: 'Besar Pengeluaran',
                 dataIndex: 'amount',
                 key: 'amount'
+            },
+            {
+                title: 'Tanggal Transaksi',
+                dataIndex: 'tanggal_transaksi',
+                key: 'tanggal_transaksi'
             },
             {
                 title: 'Keterangan',
