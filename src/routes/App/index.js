@@ -11,6 +11,7 @@ import User from '../User';
 import Transaksi from '../Transaksi';
 import PengeluaranList from '../PengeluaranList';
 import TransaksiList from '../TransaksiList';
+import Statistik from '../Statistik';
   
 const { SubMenu } = Menu;
 const { Header, Content, Sider, Footer } = Layout;
@@ -45,6 +46,7 @@ class App extends React.Component {
                             >
                                 <Menu.Item onClick={()=>this.navigateTo('/app/pengeluaran_list')} key="1">Pengeluaran</Menu.Item>
                                 <Menu.Item onClick={()=>this.navigateTo('/app/transaksi_list')} key="2">Transaksi</Menu.Item>
+                                <Menu.Item onClick={()=>this.navigateTo('/app/statistik')} key="3">Statistik</Menu.Item>
                             </SubMenu>
                             <SubMenu
                                 key="sub2"
@@ -81,6 +83,7 @@ class App extends React.Component {
                                 <Route exact path="/app/pengeluaran" component={Pengeluaran}/>
                                 <Route exact path="/app/pengeluaran_list" component={PengeluaranList}/>
                                 <Route exact path="/app/transaksi_list" component={TransaksiList}/>
+                                <Route exact path="/app/statistik" component={Statistik}/>
                             </Switch>
                         </Content>
                         <Footer style={{textAlign : 'center'}}>Copyright EMI Bootcamp @2019</Footer>
