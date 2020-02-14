@@ -3,6 +3,9 @@ import TableComponent from '../../Component/Table';
 import { getMonthlyData } from '../../store/statistik';
 import { Button, Modal, Input, Radio, DatePicker } from 'antd';
 import swal from 'sweetalert';
+import moment from 'moment';
+
+const { MonthPicker } = DatePicker;
 
 export default class Statistik extends React.Component{
 
@@ -18,6 +21,7 @@ export default class Statistik extends React.Component{
         });
     }
 
+    
     onChangeType = (event) => {
         this.setState({
             type : event.target.value
@@ -32,8 +36,8 @@ export default class Statistik extends React.Component{
 
     handleDateClick = (date, dateString)=>{
         console.log(date, dateString);
-
-            this.onChangeText('month', '2020-02');
+        
+        this.onChangeText('month', dateString);
             
             
     }
@@ -54,6 +58,7 @@ export default class Statistik extends React.Component{
         data: 0,
         month:'',
         type:'',
+        date:'',
         editModalVisible: false,
         defaultValue: {
             amount: ''
@@ -66,7 +71,7 @@ export default class Statistik extends React.Component{
                 <h3>Statistik Bulanan</h3>
                 
                 <div className="form-controller">
-                <DatePicker
+                <MonthPicker
                       placeholder={"Pilih Bulan & Tahun"}
                       onChange={this.handleDateClick} />
                 </div>
@@ -90,10 +95,8 @@ export default class Statistik extends React.Component{
                     <Button type="primary" onClick={this.save}>Cari</Button>
                     
                 </div>
-                <div>
-                <Input
-                        value={this.state.data}  
-                        placeholder={"Besar Pengeluaran"}/>
+                <div className="form-controller">
+            <h4>Besar Pengeluaran:{this.state.data}</h4>
                 </div>
             </div>
         )
