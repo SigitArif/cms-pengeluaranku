@@ -11,7 +11,16 @@ export function postData(data){
 }
 
 export function getData(){
-    return axios.get(baseUrl+'/list').then(res=>{
+    const token = localStorage.getItem("id_token");
+    const URL = baseUrl+'/list';
+    console.log(token);
+    let HEADERS = {
+        'headers' : {
+            'Authorization': token
+        }
+    }
+    return axios.get(URL, {'headers': {'Authorization': 'Bearer '+token}})
+    .then(res=>{
         return res;
     }).catch(err=>{
         throw err;

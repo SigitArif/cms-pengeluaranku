@@ -23,6 +23,9 @@ class Login extends React.Component {
         return login(data).then(res=>{
             swal('Berhasil', 'Login berhasil', 'success');
             this.props.history.push('/app/pengeluaran_list');
+            
+            localStorage.setItem("id_token", res.data.results.token);
+            
         })
         .catch(err=>{
             swal('Error', 'Cek Username Atau Password Anda', 'error');
