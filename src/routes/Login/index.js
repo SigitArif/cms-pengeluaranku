@@ -22,7 +22,7 @@ class Login extends React.Component {
         console.log(data);
         return login(data).then(res=>{
             swal('Berhasil', 'Login berhasil', 'success');
-            this.props.history.push('/app/pengeluaran_list');
+            this.props.history.push('/app/dpengeluaran_list');
             
             localStorage.setItem("id_token", res.data.results.token);
             

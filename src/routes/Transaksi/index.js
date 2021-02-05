@@ -11,6 +11,7 @@ class Transaksi extends React.Component{
         detail_transaksi : '',
         tanggal_transaksi: '',
         dateString:'',
+        uuid:'',
         pengeluaran: []
     };
 
@@ -50,7 +51,13 @@ class Transaksi extends React.Component{
 
     save = () => {
         const data = this.state;
-        return postData(data).then(res=>{
+        const addData = {
+            pengeluaran_id : data.uuid,
+            amount: data.amount,
+            detail_transaksi: data.detail_transaksi,
+            tanggal_transaksi: data.tanggal_transaksi
+        }
+        return postData(addData).then(res=>{
             swal('Berhasil', 'Data berhasil ditambahkan', 'success');
             this.setState({
                 name : 'Nama Pengeluaran',
@@ -91,15 +98,21 @@ class Transaksi extends React.Component{
           }
 
         const onClick = ({ key }) => {
-            this.setState({
-                name: key
-            })
+            this.state.pengeluaran.forEach(pgl=>{
+              if(pgl.uuid===key){
+                this.setState({
+                    uuid: key,
+                    name: pgl.name
+                })
+              }  
+            });
+            
           };
         const menu = (
         <Menu onClick={onClick}>
             {
             this.state.pengeluaran.map(post=>{
-                return <Menu.Item key={post.name} ><Icon type="shopping-cart" />{post.name}</Menu.Item> 
+                return <Menu.Item key={post.uuid} >{post.name}</Menu.Item> 
             })
             }
         </Menu>

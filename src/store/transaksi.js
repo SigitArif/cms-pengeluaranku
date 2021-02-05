@@ -1,9 +1,12 @@
 import {appConfig} from '../config/app';
 import axios from 'axios';
 const baseUrl = appConfig.apiUrl + '/pengeluaranku-service/api/v1/transaksi';
+const USER_TOKEN = localStorage.getItem('id_token');
+const AUTH = 'Bearer ' + USER_TOKEN;
 
 export function postData(data){
-    return axios.post(baseUrl+'/add', data).then(res=>{
+    const URL = baseUrl+'/add-transaksi';
+    return axios.post(URL, data, {'headers': {'Authorization': AUTH}}).then(res=>{
         return res;
     }).catch(err=>{
         throw err;
@@ -11,8 +14,7 @@ export function postData(data){
 }
 
 export function getData(){
-    const USER_TOKEN = localStorage.getItem('id_token');
-    const AUTH = 'Bearer ' + USER_TOKEN;
+    
     const URL = baseUrl+'/list'
     return axios.get(URL, {'headers': {'Authorization': AUTH}}).then(res=>{
         return res;
